@@ -1,0 +1,53 @@
+@startuml Warrior
+
+package UEAPI {
+
+    class APawn{
+        + void PossessedBy()
+    }
+
+    class ACharacter extends APawn {}
+
+    interface IAbilitySystemInterface {
+        + UAbilitySystemComponent* GetAbilitySystemComponent()
+    }
+
+    class UGameplayAbility{
+        # void OnGiveAbility()
+        # void EndAbility()
+    }
+
+}/'package UEAPI'/
+
+package AbilitySystem { 
+
+    enum EWarriorAbilityActivationPolicy {
+        OnTriggered,
+        OnGiven,
+    }
+
+    class UWarriorGameplayAbility{
+        # EWarriorAbilityActivationPolicy AbilityActivationPolicy
+    }
+
+}/'package AbilitySystem'/
+
+package Character{ 
+
+    class AWarriorBaseCharacter {
+        + UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent()
+        + UWarriorAttributeSet* GetWarriorAttributeSet()
+        __
+        # UWarriorAbilitySystemComponent* WarriorAbilitySystemComponent
+        # UWarriorAttributeSet* WarriorAttributeSet
+    }
+
+}/'package Character'/
+
+AbilitySystem.UWarriorGameplayAbility --|> UEAPI.UGameplayAbility
+AbilitySystem.UWarriorGameplayAbility::AbilityActivationPolicy --> AbilitySystem.EWarriorAbilityActivationPolicy
+
+Character.AWarriorBaseCharacter --|>  UEAPI.ACharacter
+Character.AWarriorBaseCharacter ..|>  UEAPI.IAbilitySystemInterface
+
+@enduml
