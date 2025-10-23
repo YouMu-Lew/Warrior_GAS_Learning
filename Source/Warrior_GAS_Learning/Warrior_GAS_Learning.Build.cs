@@ -15,6 +15,7 @@ public class Warrior_GAS_Learning : ModuleRules
             "InputCore",
             "EnhancedInput",
             "GameplayTags",
+            "GameplayTasks",
         });
 
         PrivateDependencyModuleNames.AddRange(new string[] { });

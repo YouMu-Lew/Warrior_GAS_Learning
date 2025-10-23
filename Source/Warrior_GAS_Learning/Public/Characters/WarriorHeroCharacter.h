@@ -24,6 +24,10 @@ class WARRIOR_GAS_LEARNING_API AWarriorHeroCharacter : public AWarriorBaseCharac
 public:
     AWarriorHeroCharacter();
 
+    //~ Begin APawn Interface.
+    virtual void PossessedBy(AController* NewController) override;
+    //~ End APawn Interface
+
 protected:
     virtual void BeginPlay() override;
 
