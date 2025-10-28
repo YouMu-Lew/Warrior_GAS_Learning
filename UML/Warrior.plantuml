@@ -17,6 +17,15 @@ package UEAPI {
         # void EndAbility()
     }
 
+    class UAbilitySystemComponent{}
+
+    class UAttributeSet{}
+
+    class UAnimInstance{
+        + NativeInitializeAnimation()
+        + NativeThreadSafeUpdateAnimation()
+    }
+
 }/'package UEAPI'/
 
 package AbilitySystem { 
@@ -30,6 +39,10 @@ package AbilitySystem {
         # EWarriorAbilityActivationPolicy AbilityActivationPolicy
     }
 
+    class UWarriorAbilitySystemComponent{}
+
+    class UWarriorAttributeSet{}
+
 }/'package AbilitySystem'/
 
 package Character{ 
@@ -42,12 +55,50 @@ package Character{
         # UWarriorAttributeSet* WarriorAttributeSet
     }
 
+    class AWarriorHeroCharacter extends AWarriorBaseCharacter{ 
+        # void BeginPlay() override
+        # void SetupPlayerInputComponent() override
+        __
+        - USpringArmComponent* CameraBoom
+        - UCameraComponent* FollowCamera
+        - UDataAsset_InputConfig* InputConfigDataAsset
+        __
+        - void Input_Move()
+        - void Input_Look()
+    }
+
 }/'package Character'/
+
+package AnimInstance{
+
+    class UWarriorBaseAnimInstance{}
+
+    class UWarriorCharacterAnimInstance extends UWarriorBaseAnimInstance{
+        # AWarriorBaseCharacter* OwningCharacter
+        # UCharacterMovementComponent* OwningMovementComponent
+        # float GroundSpeed
+        # bool bHasAcceleration
+    }
+
+    class UWarriorHeroAnimInstance extends UWarriorCharacterAnimInstance{
+        # AWarriorHeroCharacter* OwningHeroCharacter
+        # bool bShouldEnterRelaxState
+        # float EnterRelaxStateThreshold
+        # float IdleElapsedTime
+    }
+
+    class UWarriorHeroLinkedAnimLayer extends UWarriorBaseAnimInstance{}
+
+}/'package AnimInstance'/
 
 AbilitySystem.UWarriorGameplayAbility --|> UEAPI.UGameplayAbility
 AbilitySystem.UWarriorGameplayAbility::AbilityActivationPolicy --> AbilitySystem.EWarriorAbilityActivationPolicy
+AbilitySystem.UWarriorAbilitySystemComponent --|> UEAPI.UAbilitySystemComponent
+AbilityStstem.UWarriorAttributeSet --|> UEAPI.UAttributeSet
 
 Character.AWarriorBaseCharacter --|>  UEAPI.ACharacter
 Character.AWarriorBaseCharacter ..|>  UEAPI.IAbilitySystemInterface
+
+AnimInstance.UWarriorBaseAnimInstance --|> UEAPI.UAnimInstance
 
 @enduml
