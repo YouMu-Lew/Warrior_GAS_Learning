@@ -1,6 +1,5 @@
 @startuml Warrior
-
-package UEAPI {
+namespace UEAPI{
 
     class APawn{
         + void PossessedBy()
@@ -8,97 +7,105 @@ package UEAPI {
 
     class ACharacter extends APawn {}
 
-    interface IAbilitySystemInterface {
-        + UAbilitySystemComponent* GetAbilitySystemComponent()
-    }
-
-    class UGameplayAbility{
-        # void OnGiveAbility()
-        # void EndAbility()
-    }
-
-    class UAbilitySystemComponent{}
-
-    class UAttributeSet{}
-
     class UAnimInstance{
         + NativeInitializeAnimation()
         + NativeThreadSafeUpdateAnimation()
     }
 
-}/'package UEAPI'/
+    package GAS {
 
-package AbilitySystem { 
+        interface IAbilitySystemInterface {
+            + UAbilitySystemComponent* GetAbilitySystemComponent()
+        }
 
-    enum EWarriorAbilityActivationPolicy {
-        OnTriggered,
-        OnGiven,
-    }
+        class UGameplayAbility{
+            # void OnGiveAbility()
+            # void EndAbility()
+        }
 
-    class UWarriorGameplayAbility{
-        # EWarriorAbilityActivationPolicy AbilityActivationPolicy
-    }
+        class UAbilitySystemComponent{}
 
-    class UWarriorAbilitySystemComponent{}
+        class UAttributeSet{}
 
-    class UWarriorAttributeSet{}
+    }/'package GAS'/
 
-}/'package AbilitySystem'/
+}/'namespace UEAPI'/
 
-package Character{ 
 
-    class AWarriorBaseCharacter {
-        + UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent()
-        + UWarriorAttributeSet* GetWarriorAttributeSet()
-        __
-        # UWarriorAbilitySystemComponent* WarriorAbilitySystemComponent
-        # UWarriorAttributeSet* WarriorAttributeSet
-    }
+namespace Warrior{ 
 
-    class AWarriorHeroCharacter extends AWarriorBaseCharacter{ 
-        # void BeginPlay() override
-        # void SetupPlayerInputComponent() override
-        __
-        - USpringArmComponent* CameraBoom
-        - UCameraComponent* FollowCamera
-        - UDataAsset_InputConfig* InputConfigDataAsset
-        __
-        - void Input_Move()
-        - void Input_Look()
-    }
+    package AbilitySystem{
 
-}/'package Character'/
+        enum EWarriorAbilityActivationPolicy {
+            OnTriggered,
+            OnGiven,
+        }
 
-package AnimInstance{
+        class UWarriorGameplayAbility{
+            # EWarriorAbilityActivationPolicy AbilityActivationPolicy
+        }
 
-    class UWarriorBaseAnimInstance{}
+        class UWarriorAbilitySystemComponent{}
 
-    class UWarriorCharacterAnimInstance extends UWarriorBaseAnimInstance{
-        # AWarriorBaseCharacter* OwningCharacter
-        # UCharacterMovementComponent* OwningMovementComponent
-        # float GroundSpeed
-        # bool bHasAcceleration
-    }
+        class UWarriorAttributeSet{}
 
-    class UWarriorHeroAnimInstance extends UWarriorCharacterAnimInstance{
-        # AWarriorHeroCharacter* OwningHeroCharacter
-        # bool bShouldEnterRelaxState
-        # float EnterRelaxStateThreshold
-        # float IdleElapsedTime
-    }
+    }/'package AbilitySystem'/
 
-    class UWarriorHeroLinkedAnimLayer extends UWarriorBaseAnimInstance{}
+    package Character{
 
-}/'package AnimInstance'/
+        class AWarriorBaseCharacter {
+            + UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent()
+            + UWarriorAttributeSet* GetWarriorAttributeSet()
+            __
+            # UWarriorAbilitySystemComponent* WarriorAbilitySystemComponent
+            # UWarriorAttributeSet* WarriorAttributeSet
+        }
 
-AbilitySystem.UWarriorGameplayAbility --|> UEAPI.UGameplayAbility
-AbilitySystem.UWarriorGameplayAbility::AbilityActivationPolicy --> AbilitySystem.EWarriorAbilityActivationPolicy
-AbilitySystem.UWarriorAbilitySystemComponent --|> UEAPI.UAbilitySystemComponent
-AbilityStstem.UWarriorAttributeSet --|> UEAPI.UAttributeSet
+        class AWarriorHeroCharacter extends AWarriorBaseCharacter{ 
+            # void BeginPlay() override
+            # void SetupPlayerInputComponent() override
+            __
+            - USpringArmComponent* CameraBoom
+            - UCameraComponent* FollowCamera
+            - UDataAsset_InputConfig* InputConfigDataAsset
+            __
+            - void Input_Move()
+            - void Input_Look()
+        }
 
-Character.AWarriorBaseCharacter --|>  UEAPI.ACharacter
-Character.AWarriorBaseCharacter ..|>  UEAPI.IAbilitySystemInterface
+    }/'package Character'/
 
-AnimInstance.UWarriorBaseAnimInstance --|> UEAPI.UAnimInstance
+    package AnimInstance{
+
+        class UWarriorBaseAnimInstance{}
+
+        class UWarriorCharacterAnimInstance extends UWarriorBaseAnimInstance{
+            # AWarriorBaseCharacter* OwningCharacter
+            # UCharacterMovementComponent* OwningMovementComponent
+            # float GroundSpeed
+            # bool bHasAcceleration
+        }
+
+        class UWarriorHeroAnimInstance extends UWarriorCharacterAnimInstance{
+            # AWarriorHeroCharacter* OwningHeroCharacter
+            # bool bShouldEnterRelaxState
+            # float EnterRelaxStateThreshold
+            # float IdleElapsedTime
+        }
+
+        class UWarriorHeroLinkedAnimLayer extends UWarriorBaseAnimInstance{}
+    }/'package AnimInstance'/
+
+}/'namespace Warrior'/
+
+Warrior.AbilitySystem.UWarriorGameplayAbility -up-|> UEAPI.GAS.UGameplayAbility
+Warrior.AbilitySystem.UWarriorGameplayAbility::AbilityActivationPolicy -[bold]-* Warrior.AbilitySystem.EWarriorAbilityActivationPolicy
+Warrior.AbilitySystem.UWarriorAbilitySystemComponent -up-|> UEAPI.GAS.UAbilitySystemComponent
+Warrior.AbilitySystem.UWarriorAttributeSet -up-|> UEAPI.GAS.UAttributeSet
+
+Warrior.Character.AWarriorBaseCharacter -up-|>  UEAPI.ACharacter
+Warrior.Character.AWarriorBaseCharacter .up.|>  UEAPI.GAS.IAbilitySystemInterface
+
+Warrior.AnimInstance.UWarriorBaseAnimInstance -up-|> UEAPI.UAnimInstance
 
 @enduml
