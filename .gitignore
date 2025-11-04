@@ -4,8 +4,6 @@
 # Visual Studio
 .vs/
 
-*.sln
-
 .vsconfig
 
 # Unreal Engine
