@@ -61,6 +61,7 @@ namespace Warrior{
             __
             # UWarriorAbilitySystemComponent* WarriorAbilitySystemComponent
             # UWarriorAttributeSet* WarriorAttributeSet
+            # TSoftObjectPtr<UDataAsset_StartUpBase> CharacterStartUpData
         }
 
         class AWarriorHeroCharacter extends AWarriorBaseCharacter{ 
@@ -116,12 +117,15 @@ namespace Warrior{
 }/'namespace Warrior'/
 
 Warrior.AbilitySystem.UWarriorGameplayAbility -up-|> UEAPI.GAS.UGameplayAbility
-Warrior.AbilitySystem.UWarriorGameplayAbility::AbilityActivationPolicy -[bold]-* Warrior.AbilitySystem.EWarriorAbilityActivationPolicy
+Warrior.AbilitySystem.UWarriorGameplayAbility::AbilityActivationPolicy .. Warrior.AbilitySystem.EWarriorAbilityActivationPolicy
 Warrior.AbilitySystem.UWarriorAbilitySystemComponent -up-|> UEAPI.GAS.UAbilitySystemComponent
 Warrior.AbilitySystem.UWarriorAttributeSet -up-|> UEAPI.GAS.UAttributeSet
 
 Warrior.Character.AWarriorBaseCharacter -up-|>  UEAPI.ACharacter
 Warrior.Character.AWarriorBaseCharacter .up.|>  UEAPI.GAS.IAbilitySystemInterface
+AWarriorBaseCharacter::WarriorAbilitySystemComponent #.. AbilitySystem
+AWarriorBaseCharacter::WarriorAttributeSet #.. AbilitySystem
+AWarriorBaseCharacter::CharacterStartUpData #.. UDataAsset_StartUpBase : TSoftObjectPtr
 
 Warrior.AnimInstance.UWarriorBaseAnimInstance -up-|> UEAPI.UAnimInstance
 
