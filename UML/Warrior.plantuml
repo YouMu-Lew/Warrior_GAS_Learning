@@ -27,6 +27,8 @@ namespace UEAPI{
 
         class UAttributeSet{}
 
+        class UDataAsset{}
+
     }/'package GAS'/
 
 }/'namespace UEAPI'/
@@ -95,6 +97,21 @@ namespace Warrior{
 
         class UWarriorHeroLinkedAnimLayer extends UWarriorBaseAnimInstance{}
     }/'package AnimInstance'/
+
+    package DataAssets{
+
+        class UDataAsset_StartUpBase extends UEAPI.GAS.UDataAsset{ 
+            + void GiveToAbilitySystemComponent()
+            __
+            # TArray<TSubclassOf<UWarriorGameplayAbility>> ActivateOnGivenAbilities
+            # TArray<TSubclassOf<UWarriorGameplayAbility>> ReactiveAbilities;
+            __
+            # void GrantAbilities()
+        }
+
+        class UDataAsset_HeroStartUpData extends UDataAsset_StartUpBase{}
+
+    }/'package DataAssets'/
 
 }/'namespace Warrior'/
 
