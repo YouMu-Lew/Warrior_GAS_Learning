@@ -12,6 +12,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UDataAsset_InputConfig;
 struct FInputActionValue;
+class UHeroCombatComponent;
 
 /**
  *
@@ -28,6 +29,8 @@ public:
     virtual void PossessedBy(AController* NewController) override;
     //~ End APawn Interface
 
+    FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
+
 protected:
     virtual void BeginPlay() override;
 
@@ -43,6 +46,10 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera",
               meta = (AllowPrivateAccess = "true"))
     UCameraComponent* FollowCamera;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat",
+              meta = (AllowPrivateAccess = "true"))
+    UHeroCombatComponent* HeroCombatComponent;
 
 #pragma endregion
 

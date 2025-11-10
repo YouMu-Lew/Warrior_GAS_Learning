@@ -15,6 +15,7 @@
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "AbilitySystem/WarriorAttributeSet.h"
 #include "DataAssets/StartUpData/DataAsset_StartUpBase.h"
+#include "Components/Combat/HeroCombatComponent.h"
 
 #include "WarriorDebugHelper.h"
 
@@ -51,6 +52,9 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
     GetCharacterMovement()->RotationRate               = FRotator(0.f, 500.f, 0.f); // 设置旋转速率
     GetCharacterMovement()->MaxWalkSpeed               = 400.f;  // 设置最大行走速度
     GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; // 设置行走时刹车减速度
+
+    // 初始化 HeroCombatComponent
+    HeroCombatComponent = CreateDefaultSubobject<UHeroCombatComponent>(TEXT("HeroCombatComponent"));
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController* NewController)
