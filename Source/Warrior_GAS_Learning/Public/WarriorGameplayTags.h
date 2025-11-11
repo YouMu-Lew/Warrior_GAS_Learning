@@ -10,4 +10,7 @@ namespace WarriorGameplayTags {
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Move);
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look);
 
+    /** Player Tags */
+    WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Weapon_Axe);
+
 } // namespace WarriorGameplayTags

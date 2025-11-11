@@ -6,6 +6,8 @@
 #include "Abilities/GameplayAbility.h"
 #include "WarriorGameplayAbility.generated.h"
 
+class UPawnCombatComponent;
+
 UENUM(BlueprintType)
 enum class EWarriorAbilityActivationPolicy : uint8 {
     OnTriggered,
@@ -25,6 +27,7 @@ protected:
     /** Called when the ability is given to an AbilitySystemComponent */
     virtual void OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo,
                                const FGameplayAbilitySpec& Spec) override;
+
     /** Native function, called if an ability ends normally or abnormally. If bReplicate is set to
      * true, try to replicate the ending to the client/server */
     virtual void EndAbility(const FGameplayAbilitySpecHandle Handle,
@@ -36,4 +39,7 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "WarriorAbility")
     EWarriorAbilityActivationPolicy AbilityActivationPolicy =
         EWarriorAbilityActivationPolicy::OnTriggered;
+
+    UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+    UPawnCombatComponent* GetPawnCombatComponentFromActorInfo() const;
 };

@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Components/Combat/PawnCombatComponent.h"
 
 void UWarriorGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo,
                                             const FGameplayAbilitySpec& Spec)
@@ -27,4 +28,10 @@ void UWarriorGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle
             ActorInfo->AbilitySystemComponent->ClearAbility(Handle);
         }
     }
+}
+
+UPawnCombatComponent* UWarriorGameplayAbility::GetPawnCombatComponentFromActorInfo() const
+{
+    // TODO: 优化：存在多个 CombatComponent 时，结果不一定符合预期
+    return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
 }
