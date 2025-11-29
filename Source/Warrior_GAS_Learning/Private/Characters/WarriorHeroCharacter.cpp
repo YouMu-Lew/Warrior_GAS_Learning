@@ -48,10 +48,10 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
     FollowCamera->bUsePawnControlRotation = false; // 禁用摄像机自身的控制器旋转
 
     // 配置角色移动组件的各项参数，实现流畅的第三人称移动控制
-    GetCharacterMovement()->bOrientRotationToMovement  = true; // 角色朝向与移动方向一致
+    GetCharacterMovement()->bOrientRotationToMovement  = true;                      // 角色朝向与移动方向一致
     GetCharacterMovement()->RotationRate               = FRotator(0.f, 500.f, 0.f); // 设置旋转速率
-    GetCharacterMovement()->MaxWalkSpeed               = 400.f;  // 设置最大行走速度
-    GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; // 设置行走时刹车减速度
+    GetCharacterMovement()->MaxWalkSpeed               = 400.f;                     // 设置最大行走速度
+    GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;                    // 设置行走时刹车减速度
 
     // 初始化 HeroCombatComponent
     HeroCombatComponent = CreateDefaultSubobject<UHeroCombatComponent>(TEXT("HeroCombatComponent"));
@@ -90,12 +90,10 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
     auto* WarriorInputComponent = CastChecked<UWarriorInputComponent>(PlayerInputComponent);
 
-    WarriorInputComponent->BindNativeInputAction(
-        InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this,
-        &ThisClass::Input_Move);
-    WarriorInputComponent->BindNativeInputAction(
-        InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this,
-        &ThisClass::Input_Look);
+    WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this,
+                                                 &ThisClass::Input_Move);
+    WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this,
+                                                 &ThisClass::Input_Look);
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)

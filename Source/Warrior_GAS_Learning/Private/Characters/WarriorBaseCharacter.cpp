@@ -16,8 +16,7 @@ AWarriorBaseCharacter::AWarriorBaseCharacter()
 
     GetMesh()->bReceivesDecals = false;
 
-    WarriorAbilitySystemComponent = CreateDefaultSubobject<UWarriorAbilitySystemComponent>(
-        TEXT("WarriorAbilitySystemComponent"));
+    WarriorAbilitySystemComponent = CreateDefaultSubobject<UWarriorAbilitySystemComponent>(TEXT("WarriorAbilitySystemComponent"));
 
     WarriorAttributeSet = CreateDefaultSubobject<UWarriorAttributeSet>(TEXT("WarriorAttributeSet"));
 }
@@ -29,8 +28,7 @@ void AWarriorBaseCharacter::PossessedBy(AController* NewController)
     if (WarriorAbilitySystemComponent) {
         WarriorAbilitySystemComponent->InitAbilityActorInfo(this, this);
 
-        ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"),
-                   *GetName());
+        ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
     }
 }
 

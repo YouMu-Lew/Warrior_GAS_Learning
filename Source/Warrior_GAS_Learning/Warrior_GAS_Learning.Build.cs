@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using UnrealBuildTool.Rules;
 
 public class Warrior_GAS_Learning : ModuleRules
 {
@@ -14,6 +15,7 @@ public class Warrior_GAS_Learning : ModuleRules
             "Engine",
             "InputCore",
             "EnhancedInput",
+            "GameplayAbilities",
             "GameplayTags",
             "GameplayTasks",
         });
