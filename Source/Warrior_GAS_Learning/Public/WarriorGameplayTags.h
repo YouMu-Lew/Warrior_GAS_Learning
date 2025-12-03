@@ -15,4 +15,6 @@ namespace WarriorGameplayTags {
     /** Player Tags */
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Weapon_Axe);
 
+    WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_Equip_Axe);
+    WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_Unequip_Axe);
 } // namespace WarriorGameplayTags

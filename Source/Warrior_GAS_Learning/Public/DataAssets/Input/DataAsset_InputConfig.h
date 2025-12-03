@@ -8,9 +8,6 @@
 
 #include "DataAsset_InputConfig.generated.h"
 
-// #include <InputAction.h>
-// #include "InputMappingContext.h"
-// TODO: 此处教程是直接声明了类，没搞懂为何不用 include
 class UInputAction;
 class UInputMappingContext;
 
