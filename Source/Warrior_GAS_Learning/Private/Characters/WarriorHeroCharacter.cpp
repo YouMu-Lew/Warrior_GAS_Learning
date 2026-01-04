@@ -78,9 +78,9 @@ void AWarriorHeroCharacter::BeginPlay()
 
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-    checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config."))
+    checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config."));
 
-        ULocalPlayer* LocalPlayer = GetController<APlayerController>()->GetLocalPlayer();
+    ULocalPlayer* LocalPlayer = GetController<APlayerController>()->GetLocalPlayer();
 
     auto* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
 
