@@ -71,9 +71,7 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 
 void AWarriorHeroCharacter::BeginPlay()
 {
-    Super::BeginPlay();
-
-    Debug::Print(TEXT("Working..."));
+    Super::BeginPlay()
 }
 
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
