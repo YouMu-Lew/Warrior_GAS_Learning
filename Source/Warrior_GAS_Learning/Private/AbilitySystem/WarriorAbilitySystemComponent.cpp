@@ -1,7 +1,7 @@
 // YouMu All Rights Reserved.
 
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
-#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
+#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 
 void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& InInputTag)
 {
@@ -25,7 +25,7 @@ void UWarriorAbilitySystemComponent::GrantHeroWeaponAbilities(const TArray<FWarr
     for (const FWarriorHeroAbilitySet& AbilitySet : InDefaultWeaponAbilities) {
         if (!AbilitySet.IsValid()) continue;
 
-        FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant);
+        FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant.GetDefaultObject());
         AbilitySpec.SourceObject = GetAvatarActor();
         AbilitySpec.Level        = ApplyLevel;
         AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag);
