@@ -2,8 +2,12 @@
 
 #include "Characters/WarriorEnemyCharacter.h"
 #include "Components/Combat/EnemyCombatComponent.h"
+#include "DataAssets/StartUpData/DataAsset_EnemyStartUpBase.h"
 
+#include "Engine/AssetManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
+
+#include "WarriorDebugHelper.h"
 
 AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 {
@@ -30,4 +34,27 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 
     // 初始化默认值
     EnemyCombatComponent = CreateDefaultSubobject<UEnemyCombatComponent>(TEXT("EnemyCombatComponent"));
+}
+
+void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+
+    InitEnemyStartUpData();
+}
+
+void AWarriorEnemyCharacter::InitEnemyStartUpData()
+{
+    if (CharacterStartUpData.IsNull()) {
+        return;
+    }
+
+    UAssetManager::GetStreamableManager().RequestAsyncLoad(
+        CharacterStartUpData.ToSoftObjectPath(), FStreamableDelegate::CreateLambda([this]() {
+            if (UDataAsset_StartUpBase* LoadedStartUpData = CharacterStartUpData.Get()) {
+                LoadedStartUpData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
+
+                Debug::Print(TEXT("Enemy Start Up Data Loaded."), FColor::Green);
+            }
+        }));
 }
