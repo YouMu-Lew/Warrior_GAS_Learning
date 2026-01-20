@@ -29,4 +29,5 @@ namespace WarriorGameplayTags {
 
     /** Enemy Tags */
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon);
+
 } // namespace WarriorGameplayTags
