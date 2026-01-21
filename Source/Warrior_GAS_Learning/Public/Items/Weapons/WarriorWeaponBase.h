@@ -26,4 +26,12 @@ protected:
 
     UPROPERTY(VisibleAnyWhere, BlueprintReadOnly, Category = "Weapons")
     UBoxComponent* WeaponCollisionBox;
+
+    // 必须声明 UFUNCTION 宏，否则无法正确绑定
+    UFUNCTION()
+    void OnWeaponCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+                                          int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+    UFUNCTION()
+    void OnWeaponCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+                                        int32 OtherBodyIndex);
 };

@@ -11,6 +11,14 @@
 
 class AWarriorWeaponBase;
 
+// TODO: 这里为何不定义在 WarriorEnumTypes 里？
+UENUM(BlueprintType)
+enum class EToggleDamageType : uint8 {
+    CurrentEquippedWeapon,
+    LeftHand,
+    RightHand,
+};
+
 /**
  *
  */
@@ -24,8 +32,7 @@ public:
     FGameplayTag CurrentEquippedWaeponTag;
 
     UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
-    void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister,
-                               AWarriorWeaponBase* InWeaponToRegister,
+    void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, AWarriorWeaponBase* InWeaponToRegister,
                                bool bRegisterAsEquippedWeapon = false);
 
     UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
@@ -33,6 +40,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
     AWarriorWeaponBase* GetCharacterCurrentEquippedWeapon() const;
+
+    UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+    void ToggleWeaponCollision(bool bEnableCollision, EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon);
 
 private:
     TMap<FGameplayTag, AWarriorWeaponBase*> CharacterCarriedWeaponMap;

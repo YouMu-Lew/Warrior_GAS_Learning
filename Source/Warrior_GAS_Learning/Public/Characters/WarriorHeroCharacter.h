@@ -32,6 +32,10 @@ public:
 
     FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
 
+    //~ Begin IPawnCombatInterface Interface.
+    virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+    //~ End IPawnCombatInterface Interface
+
 protected:
     virtual void BeginPlay() override;
 

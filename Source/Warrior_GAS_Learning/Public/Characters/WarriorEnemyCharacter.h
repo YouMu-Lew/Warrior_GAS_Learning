@@ -26,6 +26,10 @@ public:
 
     FORCEINLINE UEnemyCombatComponent* GetEnemyCombatComponent() const { return EnemyCombatComponent; }
 
+    //~ Begin IPawnCombatInterface Interface.
+    virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+    //~ End IPawnCombatInterface Interface
+
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
     UEnemyCombatComponent* EnemyCombatComponent;
