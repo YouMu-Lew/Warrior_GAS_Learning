@@ -16,6 +16,10 @@ class WARRIOR_GAS_LEARNING_API UHeroCombatComponent : public UPawnCombatComponen
 {
     GENERATED_BODY()
 
+public:
     UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
     AWarriorHeroWeapon* GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const;
+
+    virtual void OnHitTargetActor(AActor* HitActor) override;
+    virtual void OnWeaponPulledFromTargetActor(AActor* InteractedActor) override;
 };

@@ -8,6 +8,8 @@
 
 class UBoxComponent;
 
+DECLARE_DELEGATE_OneParam(FOnTargetInteractedDelegate, AActor*)
+
 UCLASS()
 class WARRIOR_GAS_LEARNING_API AWarriorWeaponBase : public AActor
 {
@@ -19,6 +21,9 @@ public:
 
     FORCEINLINE UStaticMeshComponent* GetWeaponMesh() { return WeaponMesh; }
     FORCEINLINE UBoxComponent* GetWeaponCollisionBox() { return WeaponCollisionBox; }
+
+    FOnTargetInteractedDelegate OnWeaponHitTarget;
+    FOnTargetInteractedDelegate OnWeaponPulledFromTarget;
 
 protected:
     UPROPERTY(VisibleAnyWhere, BlueprintReadOnly, Category = "Weapons")
