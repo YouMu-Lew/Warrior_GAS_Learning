@@ -59,12 +59,12 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
     float SourceAttackPower = 0.f;
     ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWarriorDamageCapture().AttackPowerDef, EvaluateParameters,
                                                                SourceAttackPower);
-    Debug::Print(TEXT("SourceAttackPower"), SourceAttackPower);
+    // Debug::Print(TEXT("SourceAttackPower"), SourceAttackPower);
 
     float TargetDefensePower = 0.f;
     ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWarriorDamageCapture().DefensePowerDef, EvaluateParameters,
                                                                TargetDefensePower);
-    Debug::Print(TEXT("TargetDefensePower"), TargetDefensePower);
+    // Debug::Print(TEXT("TargetDefensePower"), TargetDefensePower);
 
     EffectSpec.SetByCallerTagMagnitudes;
 
@@ -76,13 +76,13 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
         if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Shared_SetByCaller_BaseDamage)) {
             BaseDamage = TagMagnitude.Value;
 
-            Debug::Print(TEXT("BaseDamage_1"), BaseDamage);
+            // Debug::Print(TEXT("BaseDamage_1"), BaseDamage);
         } else if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_LightAttack)) {
             UsedLightAttackComboCount = FMath::TruncToInt(TagMagnitude.Value);
-            Debug::Print(TEXT("UsedLightAttackComboCount"), UsedLightAttackComboCount);
+            // Debug::Print(TEXT("UsedLightAttackComboCount"), UsedLightAttackComboCount);
         } else if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_HeavyAttack)) {
             UsedHeavyAttackComboCount = FMath::TruncToInt(TagMagnitude.Value);
-            Debug::Print(TEXT("UsedHeavyAttackComboCount"), UsedHeavyAttackComboCount);
+            // Debug::Print(TEXT("UsedHeavyAttackComboCount"), UsedHeavyAttackComboCount);
         }
     }
 
@@ -94,12 +94,12 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 
     if (UsedLightAttackComboCount > 1) {
         BaseDamage *= (1.f + LightAttackComboDamagePercentPerStack * (UsedLightAttackComboCount - 1));
-        Debug::Print(TEXT("BaseDamage_2"), BaseDamage);
+        // Debug::Print(TEXT("BaseDamage_2"), BaseDamage);
     }
 
     if (UsedHeavyAttackComboCount > 1) {
         BaseDamage *= (1.f + HeavyAttackComboDamagePercentPerStack * UsedHeavyAttackComboCount);
-        Debug::Print(TEXT("BaseDamage_3"), BaseDamage);
+        // Debug::Print(TEXT("BaseDamage_3"), BaseDamage);
     }
 
     // 最终伤害计算公式
