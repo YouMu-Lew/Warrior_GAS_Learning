@@ -28,6 +28,13 @@ public:
     UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
     UHeroCombatComponent* GetHeroCombatComponentFromActorInfo();
 
+    /**
+     * 可根据需求自定义参数的伤害效果规格句柄生成函数
+     */
+    UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+    FGameplayEffectSpecHandle MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> DamageEffectClass, float InWeaponBaseDamage,
+                                                             FGameplayTag InCurrentAttackTypeTag, int32 InUsedComboCount);
+
 private:
     TWeakObjectPtr<AWarriorHeroCharacter> _CachedHeroCharacter;
     TWeakObjectPtr<AWarriorHeroController> _CachedHeroController;

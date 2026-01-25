@@ -27,10 +27,15 @@ namespace WarriorGameplayTags {
 
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_JumpToFinisher);
 
+    WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_SetByCaller_AttackType_LightAttack);
+    WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_SetByCaller_AttackType_HeavyAttack);
+
     /** Enemy Tags */
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon);
 
     /** Shared Tags */
     WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_MeleeHit);
+
+    WARRIOR_GAS_LEARNING_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_SetByCaller_BaseDamage);
 
 } // namespace WarriorGameplayTags

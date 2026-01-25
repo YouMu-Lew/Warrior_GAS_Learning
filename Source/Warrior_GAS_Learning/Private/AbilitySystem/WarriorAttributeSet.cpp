@@ -4,10 +4,10 @@
 
 UWarriorAttributeSet::UWarriorAttributeSet()
 {
-    InitCurrentHealth(100.f);
-    InitMaxHealth(100.f);
+    InitCurrentHealth(0.f);
+    InitMaxHealth(0.f);
     InitCurrentRage(0.f);
-    InitMaxRage(100.f);
-    InitAttackPower(20.f);
-    InitDefensePower(10.f);
+    InitMaxRage(0.f);
+    InitAttackPower(0.f);
+    InitDefensePower(0.f);
 }

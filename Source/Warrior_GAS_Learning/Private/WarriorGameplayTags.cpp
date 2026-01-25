@@ -25,10 +25,15 @@ namespace WarriorGameplayTags {
 
     UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher");
 
+    UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_LightAttack, "Player.SetByCaller.AttackType.LightAttack");
+    UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_HeavyAttack, "Player.SetByCaller.AttackType.HeavyAttack");
+
     /** Enemy Tags */
     UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon, "Enemy.Weapon");
 
     /** Shared Tags */
     UE_DEFINE_GAMEPLAY_TAG(Shared_Event_MeleeHit, "Shared.Event.MeleeHit");
+
+    UE_DEFINE_GAMEPLAY_TAG(Shared_SetByCaller_BaseDamage, "Shared.SetByCaller.BaseDamage");
 
 } // namespace WarriorGameplayTags
