@@ -104,7 +104,7 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 
     // 最终伤害计算公式
     const float FinalDamage = BaseDamage * SourceAttackPower / TargetDefensePower;
-    Debug::Print(TEXT("FinalDamage"), FinalDamage);
+    //Debug::Print(TEXT("FinalDamage"), FinalDamage);
 
     if (FinalDamage > 0.f) {
         OutExecutionOutput.AddOutputModifier(

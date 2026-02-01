@@ -2,6 +2,8 @@
 
 #include "AbilitySystem/WarriorAttributeSet.h"
 #include "GameplayEffectExtension.h"
+#include "WarriorFunctionLibrary.h"
+#include "WarriorGameplayTags.h"
 
 #include "WarriorDebugHelper.h"
 
@@ -26,14 +28,14 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCal
         const auto OldHealth = GetCurrentHealth();
         SetCurrentHealth(FMath::Clamp(GetCurrentHealth() - GetDamageTaken(), 0.f, GetMaxHealth()));
 
-        Debug::Print(
-            FString::Printf(TEXT("Old Health: %f\nDamage Taken: %f\nCur Health: %f"), OldHealth, GetDamageTaken(), GetCurrentHealth()),
-            FColor::Red);
+        //Debug::Print(
+        //    FString::Printf(TEXT("Old Health: %f\nDamage Taken: %f\nCur Health: %f"), OldHealth, GetDamageTaken(), GetCurrentHealth()),
+        //    FColor::Red);
 
         // TODO: Notify the UI
 
         if (GetCurrentHealth() <= 0.f) {
-            // TODO: Handle death
+            UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(), WarriorGameplayTags::Shared_Status_Dealth);
         }
     }
 }
