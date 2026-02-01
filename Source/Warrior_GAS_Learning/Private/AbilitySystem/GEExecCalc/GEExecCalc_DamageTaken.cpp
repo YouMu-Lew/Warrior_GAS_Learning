@@ -48,8 +48,6 @@ UGEExecCalc_DamageTaken::UGEExecCalc_DamageTaken()
 void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams,
                                                      FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const
 {
-    GEngine->AddOnScreenDebugMessage(-1, 7.f, FColor::Black, TEXT("--------------------------------"));
-
     const FGameplayEffectSpec& EffectSpec = ExecutionParams.GetOwningSpec();
 
     FAggregatorEvaluateParameters EvaluateParameters;
@@ -110,6 +108,4 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
         OutExecutionOutput.AddOutputModifier(
             FGameplayModifierEvaluatedData(GetWarriorDamageCapture().DamageTakenProperty, EGameplayModOp::Override, FinalDamage));
     }
-
-    GEngine->AddOnScreenDebugMessage(-1, 7.f, FColor::Black, TEXT("--------------------------------"));
 }
