@@ -3,6 +3,7 @@
 #include "Characters/WarriorEnemyCharacter.h"
 #include "Components/Combat/EnemyCombatComponent.h"
 #include "DataAssets/StartUpData/DataAsset_EnemyStartUpBase.h"
+#include "Components/UI/EnemyUIComponent.h"
 
 #include "Engine/AssetManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -34,11 +35,18 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 
     // 初始化默认值
     EnemyCombatComponent = CreateDefaultSubobject<UEnemyCombatComponent>(TEXT("EnemyCombatComponent"));
+
+    EnemyUIComponent = CreateDefaultSubobject<UEnemyUIComponent>(TEXT("EnemyUIComponent"));
 }
 
 UPawnCombatComponent* AWarriorEnemyCharacter::GetPawnCombatComponent() const
 {
     return EnemyCombatComponent;
+}
+
+UPawnUIComponent* AWarriorEnemyCharacter::GetPawnUIComponent() const
+{
+    return EnemyUIComponent;
 }
 
 void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
