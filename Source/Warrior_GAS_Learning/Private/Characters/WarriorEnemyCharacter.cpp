@@ -49,6 +49,11 @@ UPawnUIComponent* AWarriorEnemyCharacter::GetPawnUIComponent() const
     return EnemyUIComponent;
 }
 
+UEnemyUIComponent* AWarriorEnemyCharacter::GetEnemyUIComponent() const
+{
+    return EnemyUIComponent;
+}
+
 void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
 {
     Super::PossessedBy(NewController);
@@ -58,13 +63,15 @@ void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
 
 void AWarriorEnemyCharacter::InitEnemyStartUpData()
 {
-    if (CharacterStartUpData.IsNull()) {
+    if (CharacterStartUpData.IsNull())
+    {
         return;
     }
 
     UAssetManager::GetStreamableManager().RequestAsyncLoad(
         CharacterStartUpData.ToSoftObjectPath(), FStreamableDelegate::CreateLambda([this]() {
-            if (UDataAsset_StartUpBase* LoadedStartUpData = CharacterStartUpData.Get()) {
+            if (UDataAsset_StartUpBase* LoadedStartUpData = CharacterStartUpData.Get())
+            {
                 LoadedStartUpData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
             }
         }));
