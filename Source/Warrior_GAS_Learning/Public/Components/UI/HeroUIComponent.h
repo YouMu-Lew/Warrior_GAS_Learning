@@ -13,4 +13,8 @@ UCLASS()
 class WARRIOR_GAS_LEARNING_API UHeroUIComponent : public UPawnUIComponent
 {
     GENERATED_BODY()
+
+public:
+    UPROPERTY(BlueprintAssignable, Category = "UI")
+    FOnPercentChangedDelegate OnCurrentRageChanged;
 };

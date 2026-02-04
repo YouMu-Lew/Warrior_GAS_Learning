@@ -4,6 +4,9 @@
 #include "GameplayEffectExtension.h"
 #include "WarriorFunctionLibrary.h"
 #include "WarriorGameplayTags.h"
+#include "Interfaces/PawnUIInterface.h"
+#include "Components/UI/PawnUIComponent.h"
+#include "Components/UI/HeroUIComponent.h"
 
 #include "WarriorDebugHelper.h"
 
@@ -19,22 +22,43 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 
 void UWarriorAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
+    if (!CachedPawnUIInterface.IsValid())
+    {
+        CachedPawnUIInterface = TWeakInterfacePtr<IPawnUIInterface>(Data.Target.GetAvatarActor());
+    }
+
+    checkf(CachedPawnUIInterface.IsValid(), TEXT("%s didn't implement IPawnUIInterface."),
+           *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
+
+    UPawnUIComponent* PawnUIComponent = CachedPawnUIInterface->GetPawnUIComponent();
+
+    checkf(PawnUIComponent, TEXT("Couldn't extrac a PawnUIComponent from %s."), *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
+
     const auto& Attribute = Data.EvaluatedData.Attribute;
-    if (Attribute == GetCurrentHealthAttribute()) {
+    if (Attribute == GetCurrentHealthAttribute())
+    {
         SetCurrentHealth(FMath::Clamp(GetCurrentHealth(), 0.f, GetMaxHealth()));
-    } else if (Attribute == GetCurrentRageAttribute()) {
+
+        PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth() / GetMaxHealth());
+    }
+    else if (Attribute == GetCurrentRageAttribute())
+    {
         SetCurrentRage(FMath::Clamp(GetCurrentRage(), 0.f, GetMaxRage()));
-    } else if (Attribute == GetDamageTakenAttribute()) {
+
+        if (UHeroUIComponent* HeroUIComponent = CachedPawnUIInterface->GetHeroUIComponent())
+        {
+            HeroUIComponent->OnCurrentRageChanged.Broadcast(GetCurrentRage() / GetMaxRage());
+        }
+    }
+    else if (Attribute == GetDamageTakenAttribute())
+    {
         const auto OldHealth = GetCurrentHealth();
         SetCurrentHealth(FMath::Clamp(GetCurrentHealth() - GetDamageTaken(), 0.f, GetMaxHealth()));
 
-        //Debug::Print(
-        //    FString::Printf(TEXT("Old Health: %f\nDamage Taken: %f\nCur Health: %f"), OldHealth, GetDamageTaken(), GetCurrentHealth()),
-        //    FColor::Red);
-
         // TODO: Notify the UI
 
-        if (GetCurrentHealth() <= 0.f) {
+        if (GetCurrentHealth() <= 0.f)
+        {
             UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(), WarriorGameplayTags::Shared_Status_Death);
         }
     }

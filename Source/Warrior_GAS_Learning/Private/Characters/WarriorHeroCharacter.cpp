@@ -65,8 +65,10 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
     Super::PossessedBy(NewController);
 
     // 同步加载 StartUpDataAsset
-    if (!CharacterStartUpData.IsNull()) {
-        if (UDataAsset_StartUpBase* LoadedData = CharacterStartUpData.LoadSynchronous()) {
+    if (!CharacterStartUpData.IsNull())
+    {
+        if (UDataAsset_StartUpBase* LoadedData = CharacterStartUpData.LoadSynchronous())
+        {
             LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
         }
     }
@@ -78,6 +80,11 @@ UPawnCombatComponent* AWarriorHeroCharacter::GetPawnCombatComponent() const
 }
 
 UPawnUIComponent* AWarriorHeroCharacter::GetPawnUIComponent() const
+{
+    return HeroUIComponent;
+}
+
+UHeroUIComponent* AWarriorHeroCharacter::GetHeroUIComponent() const
 {
     return HeroUIComponent;
 }
@@ -116,13 +123,15 @@ void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue
 
     const FRotator MovementRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
 
-    if (MovementVector.Y != 0.f) {
+    if (MovementVector.Y != 0.f)
+    {
         const FVector ForwardDirection = MovementRotation.RotateVector(FVector::ForwardVector);
 
         AddMovementInput(ForwardDirection, MovementVector.Y);
     }
 
-    if (MovementVector.X != 0.f) {
+    if (MovementVector.X != 0.f)
+    {
         const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
 
         AddMovementInput(RightDirection, MovementVector.X);
@@ -133,11 +142,13 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue& InputActionValue
 {
     const FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
 
-    if (LookAxisVector.X != 0.f) {
+    if (LookAxisVector.X != 0.f)
+    {
         AddControllerYawInput(LookAxisVector.X);
     }
 
-    if (LookAxisVector.Y != 0.f) {
+    if (LookAxisVector.Y != 0.f)
+    {
         AddControllerPitchInput(LookAxisVector.Y);
     }
 }
