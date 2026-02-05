@@ -42,4 +42,7 @@ struct FWarriorHeroWeaponData
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     FScalableFloat WeaponBaseDamage; // 可用 Curve Table 进行伤害缩放
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    TSoftObjectPtr<UTexture2D> SoftWeaponIconTexture;
 };
