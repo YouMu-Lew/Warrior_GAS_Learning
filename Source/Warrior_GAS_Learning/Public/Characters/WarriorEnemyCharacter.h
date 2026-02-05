@@ -9,6 +9,7 @@
 
 class UEnemyCombatComponent;
 class UEnemyUIComponent;
+class UWidgetComponent;
 
 /**
  *
@@ -19,6 +20,8 @@ class WARRIOR_GAS_LEARNING_API AWarriorEnemyCharacter : public AWarriorBaseChara
     GENERATED_BODY()
 
 public:
+    virtual void BeginPlay() override;
+
     //~ Begin APawn Interface.
     virtual void PossessedBy(AController* NewController) override;
     //~ End APawn Interface
@@ -42,6 +45,9 @@ protected:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
     UEnemyUIComponent* EnemyUIComponent;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
+    UWidgetComponent* EnemyHealthWidgetComponent;
 
 private:
     /**
