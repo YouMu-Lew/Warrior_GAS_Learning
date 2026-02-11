@@ -4,7 +4,7 @@ AccessModifierOffset: -4
 AllowShortBlocksOnASingleLine: Empty
 AllowShortFunctionsOnASingleLine: Inline
 BasedOnStyle: LLVM
-ColumnLimit: 100
+ColumnLimit: 140
 Language: Cpp
 PointerAlignment: Left
 SortIncludes: false
@@ -38,12 +38,17 @@ AlignEscapedNewlines: Left
 
 # 自定义换行规则
 AllowShortCaseLabelsOnASingleLine: true
+# 模板声明后换行
+AlwaysBreakTemplateDeclarations: true
+
+# if return 在同一行
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 
 BreakBeforeBraces: Custom
 BraceWrapping:
+  AfterControlStatement: Always
   AfterCaseLabel: true
   AfterClass: true
-  # BraceWrappingAfterControlStatementStyle
   AfterEnum: false
   AfterFunction: true
   AfterNamespace: false
@@ -51,7 +56,7 @@ BraceWrapping:
   AfterUnion: true
   AfterExternBlock: true
   BeforeCatch: true
-  BeforeElse: false
+  BeforeElse: true
   BeforeLambdaBody: false
   BeforeWhile: false
 ...
