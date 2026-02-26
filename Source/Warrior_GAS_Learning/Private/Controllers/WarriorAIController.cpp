@@ -59,7 +59,8 @@ ETeamAttitude::Type AWarriorAIController::GetTeamAttitudeTowards(const AActor& O
 
     auto OtherTeamAgentInterface = Cast<const IGenericTeamAgentInterface>(PawnToCheck->GetController());
 
-    if (OtherTeamAgentInterface && OtherTeamAgentInterface->GetGenericTeamId() != GetGenericTeamId())
+    // 区分敌我 TeamID，敌人是玩家控制的英雄，玩家控制的英雄的TeamID为0
+    if (OtherTeamAgentInterface && OtherTeamAgentInterface->GetGenericTeamId() == FGenericTeamId(0))
     {
         return ETeamAttitude::Hostile;
     }
@@ -69,12 +70,15 @@ ETeamAttitude::Type AWarriorAIController::GetTeamAttitudeTowards(const AActor& O
 
 void AWarriorAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
-    if (Stimulus.WasSuccessfullySensed() && Actor)
+    if (!Stimulus.WasSuccessfullySensed() || !Actor) return;
+
+    UBlackboardComponent* BlackboardComponent = GetBlackboardComponent();
+
+    if (!BlackboardComponent) return;
+
+    auto TargetActor = BlackboardComponent->GetValueAsObject(FName("TargetActor"));
+    if (!TargetActor)
     {
-        auto BlackBoardComponent = GetBlackboardComponent();
-        if (BlackBoardComponent)
-        {
-            BlackBoardComponent->SetValueAsObject(FName("TargetActor"), Actor);
-        }
+        BlackboardComponent->SetValueAsObject(FName("TargetActor"), Actor);
     }
 }

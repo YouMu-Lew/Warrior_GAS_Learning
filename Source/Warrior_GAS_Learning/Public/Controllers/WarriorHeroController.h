@@ -23,6 +23,6 @@ public:
     virtual FGenericTeamId GetGenericTeamId() const override;
     //~ End UGenericTeamAgentInterface Interface
 
-    protected:
+protected:
     FGenericTeamId HeroTeamId;
 };
